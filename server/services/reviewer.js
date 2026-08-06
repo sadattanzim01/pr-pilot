@@ -3,14 +3,15 @@ const { getPRDiff, getPRFiles, getFileContent, postReviewComment } = require('./
 const { storePullRequest, updatePRReview } = require('./rag');
 
 async function reviewPullRequest({ repo, pr_number, title }) {
+  //split "owner/repoName" into separate variables for GitHub API calls
   const [owner, repoName] = repo.split('/');
 
   console.log(`🤖 Starting review for PR #${pr_number}: ${title}`);
 
-  // Step 1: Store PR in database as pending
+  //step 1: Save PR to database immediately with status "pending"
   await storePullRequest(repo, pr_number, title);
 
-  // Step 2: Fetch the diff
+  //step 2: Fetch the git diff (the actual code changes in the PR)
   let diff;
   try {
     diff = await getPRDiff(owner, repoName, pr_number);
@@ -19,11 +20,12 @@ async function reviewPullRequest({ repo, pr_number, title }) {
     return;
   }
 
-  // Step 3: Fetch changed files and their contents
+  //step 3: Fetch the full content of changed files for extra context
+  //limit to 5 files and 2000 chars each to stay within Claude's context window
   let filesContext = '';
   try {
     const files = await getPRFiles(owner, repoName, pr_number);
-    for (const file of files.slice(0, 5)) { // limit to 5 files
+    for (const file of files.slice(0, 5)) {
       const content = await getFileContent(owner, repoName, file.filename);
       if (content) {
         filesContext += `\n\n--- FILE: ${file.filename} ---\n${content.slice(0, 2000)}`;
@@ -33,8 +35,10 @@ async function reviewPullRequest({ repo, pr_number, title }) {
     console.error('⚠️ Could not fetch file contents:', err.message);
   }
 
-  // Step 4: Send to Claude for review
+  //step 4: Build the prompt and send everything to Claude for review
+  //initialize Anthropic client here so it picks up the API key from .env
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
   const prompt = `You are an expert code reviewer. Review the following pull request and provide specific, actionable feedback.
 
 PR Title: ${title}
@@ -84,7 +88,7 @@ Be concise, specific, and constructive. Reference specific lines or functions wh
     return;
   }
 
-  // Step 5: Post review comment to GitHub PR
+  //step 5: Post Claude's review as a comment directly on the GitHub PR
   try {
     await postReviewComment(owner, repoName, pr_number, review);
     console.log('✅ Review posted to GitHub PR');
@@ -92,7 +96,7 @@ Be concise, specific, and constructive. Reference specific lines or functions wh
     console.error('❌ Failed to post to GitHub:', err.message);
   }
 
-  // Step 6: Save completed review to database
+  //step 6: Update the database record with the completed review
   await updatePRReview(repo, pr_number, review);
   console.log('✅ Review saved to database');
 }

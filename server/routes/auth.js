@@ -2,21 +2,21 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-// Step 1: Redirect user to GitHub login
+//GET /auth/github — redirect user to GitHub's OAuth login page
 router.get('/github', (req, res) => {
   const params = new URLSearchParams({
     client_id: process.env.GITHUB_CLIENT_ID,
-    scope: 'repo user',
+    scope: 'repo user', // request access to repos and user profile
   });
   res.redirect(`https://github.com/login/oauth/authorize?${params}`);
 });
 
-// Step 2: GitHub redirects back here with a code
+//GET /auth/github/callback — GitHub redirects here after user approves
 router.get('/github/callback', async (req, res) => {
-  const { code } = req.query;
+  const { code } = req.query; // GitHub sends a one-time code in the URL
 
   try {
-    // Exchange code for access token
+    //Exchange the one-time code for a permanent access token
     const response = await axios.post(
       'https://github.com/login/oauth/access_token',
       {
@@ -29,7 +29,8 @@ router.get('/github/callback', async (req, res) => {
 
     const accessToken = response.data.access_token;
 
-    // Redirect to frontend with token in URL
+    //send the token to the frontend via URL parameter
+    //React will grab it, save it to localStorage, and clean the URL
     res.redirect(`http://localhost:3000?token=${accessToken}`);
   } catch (error) {
     console.error('OAuth error:', error);

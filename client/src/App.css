@@ -1,3 +1,9 @@
+/* 
+  We use Tailwind CSS for all styling in this project.
+  This file is intentionally empty, all styles are written
+  as Tailwind utility classes directly in App.tsx.
+  This was created by the create-react-app command.
+*/
 .App {
   text-align: center;
 }
