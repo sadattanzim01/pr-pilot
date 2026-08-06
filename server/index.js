@@ -23,3 +23,7 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+const apiRoutes = require('./routes/api');
+// and under the other routes:
+app.use('/api', apiRoutes);
