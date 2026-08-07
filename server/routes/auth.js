@@ -31,7 +31,7 @@ router.get('/github/callback', async (req, res) => {
 
     //send the token to the frontend via URL parameter
     //React will grab it, save it to localStorage, and clean the URL
-    res.redirect(`http://localhost:3000?token=${accessToken}`);
+    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:3000'}?token=${accessToken}`);
   } catch (error) {
     console.error('OAuth error:', error);
     res.status(500).json({ error: 'OAuth failed' });
