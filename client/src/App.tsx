@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 //base URL for all API calls to our Express server
-const API = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API = 'https://pr-pilot-production.up.railway.app';
 
 //shape of a pull request review stored in our database
 interface PR {
