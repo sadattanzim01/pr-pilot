@@ -3,7 +3,9 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 
 //load .env file first before anything else so all process.env values are available
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 const app = express();
 const PORT = process.env.PORT || 3001;
