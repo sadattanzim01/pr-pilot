@@ -6,7 +6,7 @@
 
 ---
 
-<!-- INSERT: Screenshot of the PR Pilot dashboard showing 2 completed reviews -->
+<img width="1512" height="342" alt="Screenshot 2026-08-09 at 6 54 13 PM" src="https://github.com/user-attachments/assets/b0a5e3bc-8760-4daa-83f5-72b116257701">
 
 ---
 
@@ -25,7 +25,7 @@ When a developer opens a pull request on a connected repository, PR Pilot:
 
 ---
 
-<!-- INSERT: Screenshot of Claude's review comment posted on the GitHub PR -->
+<img width="672" height="646" alt="Screenshot 2026-08-09 at 6 53 35 PM" src="https://github.com/user-attachments/assets/83a76718-23ca-47dd-8546-bb755a0b513e"><img width="672" height="646" alt="Screenshot 2026-08-09 at 6 53 50 PM" src="https://github.com/user-attachments/assets/75b4959d-260b-4146-8990-b98b1677e37d">
 
 ---
 
@@ -108,15 +108,16 @@ React dashboard displays review history live
 
 ---
 
-<!-- INSERT: Screenshot of Railway deployment showing "Online" and the deploy logs with all 3 green checkmarks -->
+<img width="438" height="262" alt="Screenshot 2026-08-09 at 7 18 10 PM" src="https://github.com/user-attachments/assets/bf8cc86f-5e01-4ff7-adb2-20f508617b00">
+<img width="1080" height="158" alt="Screenshot 2026-08-09 at 6 54 58 PM" src="https://github.com/user-attachments/assets/92dd4432-2bbe-405f-bf19-98e2b856d050">
 
 ---
 
-<!-- INSERT: Screenshot of Supabase project dashboard showing "Healthy" status -->
+<img width="547" height="195" alt="Screenshot 2026-08-09 at 6 55 54 PM" src="https://github.com/user-attachments/assets/1e3e47d9-998f-4100-ba2a-c58831c8dde6">
 
 ---
 
-<!-- INSERT: Screenshot of Vercel project overview showing "Ready" status -->
+<img width="1208" height="442" alt="Screenshot 2026-08-09 at 6 54 38 PM" src="https://github.com/user-attachments/assets/5071def9-4dcc-4190-bc03-9b4ca516f6da">
 
 ---
 
@@ -269,7 +270,4 @@ This project showcases a complete production-grade architecture: OAuth authentic
 ## Author
 
 **Sadat Tanzim**
-Second-year Honours Computer Science (Co-op) student at the University of Windsor
-Project Coordinator at UWindsor AI Club | Formula Electric Windsor embedded systems team
-
 [GitHub](https://github.com/sadattanzim01) · [LinkedIn](https://linkedin.com/in/sadattanzim)
